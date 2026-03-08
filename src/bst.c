@@ -83,7 +83,7 @@ void bstFree(BST* tree)
     free(tree);
 }
 
-// task Bф
+// task B
 
 BST* createBST()
 {
@@ -178,7 +178,79 @@ void bstPostorder(BST* tree)
     postorderRecursive(tree->root);
 }
 
-int main()
+void bstDelete(BST* tree, int value)
 {
-    return 0;
+    if (tree == NULL || tree->root == NULL) {
+        printf("Tree is empty\n");
+        return;
+    }
+
+    Node* current = tree->root;
+    Node* pref = NULL;
+    bool flag = false;
+
+    while (current != NULL) {
+        if (value < current->key) {
+            pref = current;
+            current = current->left;
+        } else if (value > current->key) {
+            pref = current;
+            current = current->right;
+        } else {
+            flag = true;
+            break;
+        }
+    }
+
+    if (!flag) {
+        printf("Value not found\n");
+        return;
+    }
+
+    if (current->left == NULL && current->right == NULL) {
+        if (pref == NULL) {
+            tree->root = NULL;
+        } else if (pref->left == current) {
+            pref->left = NULL;
+        } else {
+            pref->right = NULL;
+        }
+        free(current);
+        tree->size--;
+    } else if (current->left == NULL || current->right == NULL) {
+        Node* child;
+        if (current->left != NULL) {
+            child = current->left;
+        } else {
+            child = current->right;
+        }
+
+        if (pref == NULL) {
+            tree->root = child;
+        } else if (pref->left == current) {
+            pref->left = child;
+        } else {
+            pref->right = child;
+        }
+        free(current);
+        tree->size--;
+    } else {
+        Node* pref_search = NULL;
+        Node* current_search = current->right;
+
+        while (current_search->left != NULL) {
+            pref_search = current_search;
+            current_search = current_search->left;
+        }
+
+        current->key = current_search->key;
+
+        if (pref_search == NULL) {
+            current->right = current_search->right;
+        } else {
+            pref_search->left = current_search->right;
+        }
+        free(current_search);
+        tree->size--;
+    }
 }
