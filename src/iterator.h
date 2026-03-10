@@ -1,6 +1,6 @@
 #pragma once
-#include "stack.h"
 #include "bst.h"
+#include "stack.h"
 
 typedef struct Iterator {
     stack* Top;
