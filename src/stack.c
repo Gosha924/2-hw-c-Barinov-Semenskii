@@ -1,5 +1,5 @@
-#include "bst.h"
 #include "stack.h"
+#include "bst.h"
 #include <stdlib.h>
 
 stack* stackCreate()
@@ -15,7 +15,7 @@ void stackPush(stack* Top, Node* node)
     stack* newElem = malloc(sizeof(stack));
     newElem->node = node;
     newElem->next = Top->next;
-    Top->next = newElem;    
+    Top->next = newElem;
 }
 
 void stackPop(stack* Top)
