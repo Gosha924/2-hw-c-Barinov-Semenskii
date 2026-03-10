@@ -3,7 +3,7 @@
 
 int main()
 {
-    BST* tree = CreateBST();
+    BST* tree = createBST();
 
     bstInsert(tree, 5);
     bstInsert(tree, 3);
