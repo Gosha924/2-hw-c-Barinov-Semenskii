@@ -272,3 +272,8 @@ int bstKthMin(BST* tree, int k)
     }
     return nodeKthMin(tree->root, &k);
 }
+
+int main()
+{
+    return 0;
+}
