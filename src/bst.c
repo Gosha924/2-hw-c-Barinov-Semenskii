@@ -320,7 +320,27 @@ int bstMax(BST* tree)
     return current->key;
 }
 
-int main()
+// task E
+void insertAllNodes(BST* newBST, Node* root)
 {
-    return 0;
+    if (root == NULL) {
+        return;
+    }
+    bstInsert(newBST, root->key);
+    insertAllNodes(newBST, root->left);
+    insertAllNodes(newBST, root->right);
+}
+
+BST* bstMerge(BST* tree1, BST* tree2)
+{
+    BST* newBST = createBST();
+    if (newBST != NULL) {
+        if (tree1 != NULL) {
+            insertAllNodes(newBST, tree1->root);
+        }
+        if (tree2 != NULL) {
+            insertAllNodes(newBST, tree2->root);
+        }
+    }
+    return newBST;
 }

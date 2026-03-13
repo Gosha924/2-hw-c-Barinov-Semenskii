@@ -36,4 +36,8 @@ int bstMax(BST* tree);
 // задача D
 void bstDelete(BST* tree, int value);
 
+// задача E
+void insertAllNodes(BST* newBST, Node* root);
+BST* bstMerge(BST* tree1, BST* tree2);
+
 //.....
