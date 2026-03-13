@@ -83,7 +83,7 @@ void bstFree(BST* tree)
     free(tree);
 }
 
-// task Bф
+// task B
 
 BST* createBST()
 {
@@ -178,6 +178,78 @@ void bstPostorder(BST* tree)
     postorderRecursive(tree->root);
 }
 
+void bstDelete(BST* tree, int value)
+{
+    if (tree == NULL || tree->root == NULL) {
+        printf("Tree is empty\n");
+        return;
+    }
+
+    Node* current = tree->root;
+    Node* parent = NULL;
+    bool found = false;
+
+    while (current != NULL) {
+        if (value < current->key) {
+            parent = current;
+            current = current->left;
+        } else if (value > current->key) {
+            parent = current;
+            current = current->right;
+        } else {
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        printf("Value not found\n");
+        return;
+    }
+
+    if (current->left == NULL && current->right == NULL) {
+        if (parent == NULL) {
+            tree->root = NULL;
+        } else if (parent->left == current) {
+            parent->left = NULL;
+        } else {
+            parent->right = NULL;
+        }
+        free(current);
+        tree->size--;
+    } else if (current->left == NULL || current->right == NULL) {
+        Node* child = (current->left != NULL) ? current->left : current->right;
+
+        if (parent == NULL) {
+            tree->root = child;
+        } else if (parent->left == current) {
+            parent->left = child;
+        } else {
+            parent->right = child;
+        }
+        free(current);
+        tree->size--;
+    } else {
+        Node* successorParent = NULL;
+        Node* successor = current->right;
+
+        while (successor->left != NULL) {
+            successorParent = successor;
+            successor = successor->left;
+        }
+
+        current->key = successor->key;
+
+        if (successorParent == NULL) {
+            current->right = successor->right;
+        } else {
+            successorParent->left = successor->right;
+        }
+
+        free(successor);
+        tree->size--;
+    }
+}
 // task C
 
 int nodeHeight(Node* node)
