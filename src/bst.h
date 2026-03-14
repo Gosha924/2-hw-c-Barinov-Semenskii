@@ -33,6 +33,14 @@ int bstSize(BST* tree);
 int bstMin(BST* tree);
 int bstMax(BST* tree);
 
+/**
+ * Поведение при некорректном k:
+ * - Если k <= 0 или k > размер дерева, программа выводит
+ *   сообщение "Value error" в консоль и завершается через abort()
+ * - Это сделано для раннего обнаружения ошибок использования
+ */
+int bstKthMin(BST* tree, int k);
+
 // задача D
 void bstDelete(BST* tree, int value);
 
