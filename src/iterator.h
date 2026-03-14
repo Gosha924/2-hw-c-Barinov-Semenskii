@@ -14,7 +14,7 @@ bool iteratorHasNext(Iterator* it);
  * @return значение очередного узла
  * Если вызвать эту функцию, когда элементов больше нет,
  * программа вылетит с ошибкой 
- * "iteratorNext: no more elements".
+ * "iteratorNext: no more elements"
 */
 int iteratorNext(Iterator* it);
 void iteratorFree(Iterator* it);
